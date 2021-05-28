@@ -4,7 +4,7 @@ const ms = require("ms");
 
 module.exports = {
   async run(bot) {
-    bot.on("/startfeed", (msg) => {
+    bot.on("/startcvefeed", (msg) => {
       let chat_id = msg.chat.id;
       fs.readFile("./commands/id_db.json", (err, data) => {
         if (err) throw err;
