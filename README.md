@@ -1,6 +1,8 @@
 # CVE_Telegram_bot
 [Official Telegram's bot channel](https://t.me/cve_latest_info)
 
+![icon](./icon.jpg)
+
 ## Description and what does it do
 
 This telegram bot uses the Telebot JS Library  to connect the code with Telegram api. It can:
