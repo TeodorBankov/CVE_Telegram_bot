@@ -1,5 +1,5 @@
 # CVE_Telegram_bot
-[Official Telegram's bot channel](https://t.me/cve_latest_info)
+[Official Telegram's bot channel](https://t.me/cve_latest_info) | [Description](https://github.com/TeodorBankov/CVE_Telegram_bot#description-and-what-does-it-do) | [Installation](https://github.com/TeodorBankov/CVE_Telegram_bot#installation) | [Run](https://github.com/TeodorBankov/CVE_Telegram_bot#run) | [Plans](https://github.com/TeodorBankov/CVE_Telegram_bot#soon%EF%B8%8F) | [Contributing](https://github.com/TeodorBankov/CVE_Telegram_bot#contributing)
 
 ![icon](./icon.jpg)
 
