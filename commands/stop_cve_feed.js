@@ -2,7 +2,7 @@ const fs = require("fs");
 
 module.exports = {
   async run(bot) {
-    bot.on("/stopcvefeed", (msg) => {
+    bot.on("/stop_cve_feed", (msg) => {
       fs.readFile("./commands/id_db.json", (err, data) => {
         let chat_id = msg.chat.id;
         if (err) throw err;
