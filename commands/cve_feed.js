@@ -47,7 +47,8 @@ function generateMessage(d) {
   const b = (text) => `<b>${text}</b>`;
   const c = (text) => `<code>${text}</code>`;
 
-  let out = `${b("Name:")} ${c(d.id)}\n\n`;
+  let out = `${b("Feed:")} ${"CVE (www.cve.circl.lu)"}\n\n`;
+  out += `${b("Name:")} ${c(d.id)}\n\n`;
   out += `${b("Modified:")} ${c(new Date(d.Modified).toUTCString())}\n`;
   out += `${b("Published:")} ${c(new Date(d.Published))}\n\n`;
   
@@ -78,11 +79,11 @@ async function getLastFeed() {
   const data = (await axios.get("https://cve.circl.lu/api/last/1")).data[0];
 
   let newTimestamp = new Date(data.Modified);
-  let data_old = fs.readFileSync("./commands/data.txt").toString();
+  let data_old = fs.readFileSync("./commands/data_cve.txt").toString();
   let oldTimestamp = new Date(data_old);
 
   if (newTimestamp > oldTimestamp) {
-    fs.writeFileSync("./commands/data.txt", data.Modified);
+    fs.writeFileSync("./commands/data_cve.txt", data.Modified);
     return data;
   }
   return null;

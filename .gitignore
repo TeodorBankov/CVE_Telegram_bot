@@ -120,4 +120,6 @@ fonk.js
 
 .env
 id_db.json
-data.txt
+xdb_id.json
+data_cve.txt
+data_xdb.txt

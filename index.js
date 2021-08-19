@@ -31,10 +31,24 @@ try {
 }
 
 try {
-  if (fs.existsSync("./commands/data.txt")) {
+  if (fs.existsSync("./commands/xdb_id.json")) {
+    console.log("XDB file alredy created.");
+  } else {
+    fs.writeFile("./commands/xdb_id.json", "[]", function (err) {
+      if (err) throw err;
+      console.log("XDB File created!");
+    });
+  }
+} catch (err) {
+  console.error(err);
+}
+//THIS NEEDS TO BE MADE AS XDB_ID.JSON!
+
+try {
+  if (fs.existsSync("./commands/data_cve.txt")) {
     console.log("Data check file alredy exists.");
   } else {
-    fs.writeFile("./commands/data.txt", "0", function (err) {
+    fs.writeFile("./commands/data_cve.txt", "0", function (err) {
       if (err) throw err;
       console.log("Data check File created!");
     });
@@ -42,5 +56,19 @@ try {
 } catch (err) {
   console.error(err);
 }
+
+try {
+  if (fs.existsSync("./commands/data_xdb.txt")) {
+    console.log("Data check file alredy exists.");
+  } else {
+    fs.writeFile("./commands/data_xdb.txt", "0", function (err) {
+      if (err) throw err;
+      console.log("Xdb data check File created!");
+    });
+  }
+} catch (err) {
+  console.error(err);
+}
+
 
 bot.start();
