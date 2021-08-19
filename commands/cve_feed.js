@@ -53,13 +53,20 @@ function generateMessage(d) {
   
   if (d.access.authentication) out += `${b("Authentication:")} ${c(d.access.authentication)}\n`;
   if (d.access.complexity) out += `${b("Complexity:")} ${c(d.access.complexity)}\n`;
-  if (d.access.vector) out += `${b("Vector:")} ${c(d.access)}\n`;
+  if (d.access.vector) out += `${b("Vector:")} ${c(d.access.vector)}\n`;
 
   out += `${b("Assigner:")} ${d.assigner}\n\n`;
 
   out += `${b("Summary:")} ${d.summary}\n\n`;
 
-  out += `${b("Ref. Links:")}\n${d.references.join("\n").trim()}`;
+  out += `${b("Ref. Links:")}\n${d.references.join("\n").trim()}\n\n`;
+
+  out += `${b("Availability:")} ${c(d.impact.availability)}\n`;
+  out += `${b("Confidentiality:")} ${c(d.impact.confidentiality)}\n`;
+  out += `${b("Integrity:")} ${c(d.impact.integrity)}\n\n`;
+
+  if (d.vulnerable_configuration) out += `${b("Vulnerable Configuration(s):")} ${c(d.vulnerable_configuration.join("\n")).trim()}\n`;
+  if (d.vulnerable_product) out += `${b("Vulnerable Product(s):")} ${c(d.vulnerable_product.join("\n")).trim()}`;
   
   return out;
 }
