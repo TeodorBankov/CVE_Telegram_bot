@@ -1,9 +1,10 @@
 const fs = require("fs");
+const resCmd = require("../index").resCmd;
 
 module.exports = {
   async run(bot) {
     bot.on("/stop_cve_feed", (msg) => {
-      fs.readFile("./commands/id_db.json", (err, data) => {
+      fs.readFile(resCmd("id_db.json"), (err, data) => {
         let chat_id = msg.chat.id;
         if (err) throw err;
         let db_parsed = JSON.parse(data);
@@ -12,7 +13,7 @@ module.exports = {
           console.log("Removing... ", db_parsed);
           msg.reply.text("CVE Update feed stopped.");
           fs.writeFile(
-            "./commands/id_db.json",
+            resCmd("id_db.json"),
             JSON.stringify(db_parsed),
             function (e) {
               if (e) throw e;
