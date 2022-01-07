@@ -37,7 +37,7 @@ module.exports = {
       ids.forEach(async (chat) => {
         await bot.sendMessage(chat, msg_data, { parseMode: "HTML" }); //check here
       });
-    }, ms("30s"));
+    }, ms("10s"));
   },
 };
 
@@ -91,10 +91,9 @@ async function getLastFeed() {
 
   let newTimestamp = new Date(data.Modified);
   let data_old = fs.readFileSync(resCmd("data_cve.txt")).toString();
-  let oldTimestamp = new Date(data_old);
 
-  if (newTimestamp > oldTimestamp) {
-    fs.writeFileSync(resCmd("data_cve.txt"), data.Modified);
+  if (+newTimestamp != data_old) {
+    fs.writeFileSync(resCmd("data_cve.txt"), +(new Date(data.Modified)) + "");
     return data;
   }
   return null;
