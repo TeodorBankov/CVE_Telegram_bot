@@ -53,34 +53,47 @@ function generateMessage(d) {
   let out = `${b("Feed:")} ${"CVE (www.cve.circl.lu)"}\n\n`;
   out += `${b("Name:")} ${c(d.id)}\n\n`;
   out += `${b("Modified:")} ${c(new Date(d.Modified).toUTCString())}\n`;
-  out += `${b("Published:")} ${c(new Date(d.Published))}\n\n`;
+  out += `${b("Published:")} ${c(new Date(d.Published).toUTCString())}\n\n`;
 
-  if (d.access.authentication)
+  if (d.access?.authentication)
     out += `${b("Authentication:")} ${c(d.access.authentication)}\n`;
-  if (d.access.complexity)
+  if (d.access?.complexity)
     out += `${b("Complexity:")} ${c(d.access.complexity)}\n`;
-  if (d.access.vector) out += `${b("Vector:")} ${c(d.access.vector)}\n`;
+  if (d.access?.vector) out += `${b("Vector:")} ${c(d.access.vector)}\n`;
 
-  out += `${b("Assigner:")} ${d.assigner}\n\n`;
+  if (d.assigner) out += `${b("Assigner:")} ${d.assigner}\n\n`;
 
-  out += `${b("Summary:")} ${d.summary}\n\n`;
+  if (d.summary) out += `${b("Summary:")} ${d.summary}\n\n`;
 
-  out += `${b("Ref. Links:")}\n${d.references.join("\n").trim()}\n\n`;
+  if (d.references && d.references.length > 0)
+    out += `${b("Ref. Links:")}\n${d.references.join("\n").trim()}\n\n`;
 
-  out += `${b("Availability:")} ${c(d.impact.availability)}\n`;
-  out += `${b("Confidentiality:")} ${c(d.impact.confidentiality)}\n`;
-  out += `${b("Integrity:")} ${c(d.impact.integrity)}\n\n`;
-
-  if (d.vulnerable_configuration)
-    out += `${b("Vulnerable Configuration(s):")} ${c(
-      d.vulnerable_configuration.join("\n")
+  if (d.vulnerable_configuration && d.vulnerable_configuration.length > 0)
+    out += `${b("Vulnerable Configuration(s):")}\n${c(
+      d.vulnerable_configuration
+        .map((v) => {
+          return v
+            .split(":")
+            .slice(3)
+            .filter((v) => v != "*")
+            .join(" ");
+        })
+        .join("\n")
     ).trim()}\n`;
-  if (d.vulnerable_product)
-    out += `${b("Vulnerable Product(s):")} ${c(
-      d.vulnerable_product.join("\n")
+  if (d.vulnerable_product && d.vulnerable_product.length > 0)
+    out += `${b("Vulnerable Product(s):")}\n${c(
+      d.vulnerable_product
+        .map((v) => {
+          return v
+            .split(":")
+            .slice(3)
+            .filter((v) => v != "*")
+            .join(" ");
+        })
+        .join("\n")
     ).trim()}`;
 
-  return out;
+  return out.trim();
 }
 
 /**
@@ -93,7 +106,7 @@ async function getLastFeed() {
   let data_old = fs.readFileSync(resCmd("data_cve.txt")).toString();
 
   if (+newTimestamp != data_old) {
-    fs.writeFileSync(resCmd("data_cve.txt"), +(new Date(data.Modified)) + "");
+    fs.writeFileSync(resCmd("data_cve.txt"), +new Date(data.Modified) + "");
     return data;
   }
   return null;
